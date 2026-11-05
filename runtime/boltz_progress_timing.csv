@@ -1,0 +1,4 @@
+model,seed,completed_examples,failed_examples,progress_display_elapsed_seconds,timing_scope,source,physical_line
+boltz2,42,220,0,1748,"whole prediction progress bar; displayed seconds, not per-inference timers",logs/boltz2-42.log,234
+boltz2,43,220,0,1743,"whole prediction progress bar; displayed seconds, not per-inference timers",logs/boltz2-43.log,234
+boltz2,44,220,0,1746,"whole prediction progress bar; displayed seconds, not per-inference timers",logs/boltz2-44.log,234

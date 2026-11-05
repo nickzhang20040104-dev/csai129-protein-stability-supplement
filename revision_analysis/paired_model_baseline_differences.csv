@@ -1,0 +1,13 @@
+model,endpoint,baseline,metric,difference_model_minus_baseline,ci95_low,ci95_high
+Boltz-2,local,delta_hydrophobicity_kd,pearson_r,0.230819787743,-0.0257888978911,0.483285972938
+Boltz-2,local,blosum62_score,pearson_r,0.0990185499443,-0.0663377116475,0.240255293238
+Boltz-2,local,delta_hydrophobicity_kd,spearman_rho,0.123485990063,-0.103917304484,0.377007022613
+Boltz-2,local,blosum62_score,spearman_rho,-0.112317158367,-0.289803878542,0.101730915689
+Chai-1,local,delta_hydrophobicity_kd,pearson_r,-0.041829949541,-0.236528170751,0.166252624792
+Chai-1,local,blosum62_score,pearson_r,-0.17363118734,-0.332507998985,0.000783081971502
+Chai-1,local,delta_hydrophobicity_kd,spearman_rho,-0.0409643684787,-0.203547689384,0.125515356594
+Chai-1,local,blosum62_score,spearman_rho,-0.276767516909,-0.462913194094,-0.061270014677
+ESMFold2,local,delta_hydrophobicity_kd,pearson_r,-0.0251033957382,-0.13996155058,0.121869096763
+ESMFold2,local,blosum62_score,pearson_r,-0.156904633537,-0.389418477449,0.0614897756719
+ESMFold2,local,delta_hydrophobicity_kd,spearman_rho,-0.0253240742183,-0.198170491991,0.153242778606
+ESMFold2,local,blosum62_score,spearman_rho,-0.261127222648,-0.509801097576,0.00127429772213
