@@ -342,8 +342,8 @@
     },
     {
       "path": "supplement/CSAI129_Supplementary_Information.docx",
-      "bytes": 1592031,
-      "sha256": "7214e71df405e69e5cec66a03734da2723d0f4c1ad2be2cbad8e1e7169b2573f"
+      "bytes": 1592029,
+      "sha256": "ee44d8613cd3575d7835b53da21253ee781c06157eb40c5336686de77bcbe97e"
     },
     {
       "path": "supplement/CSAI129_Supplementary_Information.md",
@@ -352,8 +352,8 @@
     },
     {
       "path": "supplement/CSAI129_Supplementary_Information.pdf",
-      "bytes": 2311147,
-      "sha256": "6e76c539a78bb789fd370e70c08558d684f1807af27383e247844d4afdce3329"
+      "bytes": 2271051,
+      "sha256": "14ab2438fd61e11d0fd0f6e4082b21110976549f6b1b03c2bd84bc620d13016a"
     },
     {
       "path": "supplement/tables/model_correlations_source_table.csv",
