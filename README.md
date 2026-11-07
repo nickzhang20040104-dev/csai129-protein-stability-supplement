@@ -42,4 +42,4 @@ The experimental-label table is reproduced with source attribution to Pak et al.
 
 ## Version note
 
-The appendix-only release and its online reading format are dated 7 November 2026. The PDF is unchanged from the appendix-only release. Earlier Git history may contain a broader data package; this release scope does not imply that historical copies have been erased.
+The appendix-only release and its online reading format are dated 7 November 2026. The PDF was reformatted on the same date to match the supplied template's appendix styles. It contains 18 pages and preserves all supplementary scientific text, seven tables and eight figure images; the online appendix remains scientifically equivalent. Earlier Git history may contain a broader data package; this release scope does not imply that historical copies have been erased.
