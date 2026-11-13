@@ -2,7 +2,7 @@
 
 Associated manuscript: **Investigating the Relationship Between AI-Based Structure Prediction Confidence and Experimentally Determined Protein Stability**.
 
-The scientific content below reproduces the self-contained supplementary appendix dated 7 November 2026. Table and figure identifiers, numerical values and limitations are unchanged.
+The scientific content below reproduces the self-contained supplementary appendix with the runtime-reporting revision synchronised on 13 November 2026. Section S6 and Table S6 report job-level elapsed seconds per completed output; all other scientific content is unchanged.
 
 [Download PDF directly](https://raw.githubusercontent.com/nickzhang20040104-dev/csai129-protein-stability-supplement/main/supplement/CSAI129_Supplementary_Information.pdf) · [Back to repository overview](README.md)
 
@@ -25,7 +25,7 @@ The scientific content below reproduces the self-contained supplementary appendi
 | [s9](#s9) | S9 Data integrity and analysis provenance |
 | [references](#references) | References |
 
-Paper BJ-1129 · Revised 7 November 2026
+Paper BJ-1129 · Runtime-reporting revision synchronised 13 November 2026
 
 <a id="scope"></a>
 
@@ -349,26 +349,23 @@ Biohub ESMFold2 used the full local checkpoint, local ESMC-6B embeddings and rec
 
 ## S6 Recorded execution costs and environment
 
-Archived host wall-clock timers were recorded for all 660 Chai-1 and 660 successful ESMFold2 predictions and are summarised in Table S6. They begin before per-item input preparation and include the model call, structure/output writing, confidence conversion and sequence validation. They end before writing the completion JSON. ESM model/ESMC loading occurs before the loop and is excluded. The Chai mean retains first-call overhead; its first item is also its maximum. These are host timers, not CUDA-event kernel measurements.
+Table S6 divides each observed job-level completion envelope by 660 sequence–seed outputs (220 sequences × three labels). Boltz-2/Chai-1 start at the common launcher; ESMFold2 starts at the successful retry’s CUDA repair-passed marker, excluding failed loading and repair/wait. These operational ratios are not individual-output latencies. All timestamps are 16 September 2026, +08:00.
 
-**Table S6. Recorded execution time by model and seed. Per-item results show mean ± sample SD and range in seconds; Boltz has no comparable per-item timer.**
+Table S6. Observed job-level elapsed seconds per completed output, with model-specific timing boundaries.
 
-| Model | Seed | Items | Mean ± SD (s) | Range (s) |
+| Model | Outputs | Elapsed (s) | Seconds per output | Recorded interval (+08:00) |
 | --- | --- | --- | --- | --- |
-| Chai-1 | all | 660 | 32.398 ± 3.784 | 29.533–77.073 |
-| Chai-1 | 42 | 220 | 32.304 ± 4.358 | 29.533–77.073 |
-| Chai-1 | 43 | 220 | 32.632 ± 3.790 | 29.755–46.390 |
-| Chai-1 | 44 | 220 | 32.258 ± 3.106 | 29.670–40.674 |
-| ESMFold2 | all | 660 | 5.110 ± 1.549 | 3.047–8.608 |
-| ESMFold2 | 42 | 220 | 5.116 ± 1.552 | 3.056–8.220 |
-| ESMFold2 | 43 | 220 | 5.107 ± 1.550 | 3.051–8.167 |
-| ESMFold2 | 44 | 220 | 5.107 ± 1.552 | 3.047–8.608 |
+| Boltz-2 | 660 | 5,391 | 8.17 | Launcher 16:32:29 to seed-44 exit 18:02:20 |
+| Chai-1 | 660 | 21,390 | 32.41 | Launcher 16:32:29 to process exit 22:28:59 |
+| ESMFold2 retry | 660 | 3,400 | 5.15 | Repair passed 22:57:31 to retry exit 23:54:11 |
 
-Boltz-2 final batch prediction-progress displays were 29:08, 29:03 and 29:06 for seeds 42, 43 and 44, respectively: 1,748, 1,743 and 1,746 seconds for 220 items each. The displays have seconds-level precision and do not measure individual items or full process runtime. Each batch reports zero failures. The Chai/ESM completion JSON records match the corresponding inference-log records exactly.
+Secondary host item timers give mean ± sample SD 32.398 ± 3.784 s for Chai-1 and 5.110 ± 1.549 s for ESMFold2 (660 items each). They cover input preparation, inference, output writing, confidence conversion and sequence validation, ending before completion-JSON writing. They exclude pre-loop ESM/ESMC loading but retain Chai first-call overhead. These narrower measurements are host times, not CUDA-event timings.
 
-Boltz and Chai were launched concurrently on the selected CUDA device. ESM was attempted after both finished, failed during model loading and subsequently completed a separate retry after its PyTorch CUDA environment was repaired. The successful retry used PyTorch 2.11.0+cu128. The observed device name is NVIDIA vGPU-32GB; the underlying physical GPU, exclusive allocation and per-model FLOPs are not established. Thus, the recorded times are descriptive protocol costs, not a fair speed ranking.
+Boltz-2 batch progress displays were 29:08, 29:03 and 29:06 (1,748, 1,743 and 1,746 s) for seeds 42/43/44, respectively, each with 220 items and zero failures. These seconds-precision records omit full-process overhead and do not time individual items. Chai/ESM completion JSON records match the inference logs.
 
-The complete recorded launcher-to-final-retry envelope was 26,502 seconds (7 h 21 min 42 s), including concurrency, failed loading and unpartitioned waiting/repair. It is not a sum of GPU-hours or billed time. Device-wide ten-second monitoring recorded sampled maxima of 10,670 MiB during overlapping Boltz/Chai and 15,141 MiB during the ESM retry. Those samples cannot attribute memory to individual concurrent models, establish isolated peaks, or exclude shorter unsampled peaks. No energy or monetary cost is inferred.
+All runs used the same GPU and CPU hardware; the logged device is NVIDIA vGPU-32GB. Boltz-2/Chai-1 ran concurrently on CUDA device 0 with OMP_NUM_THREADS/MKL_NUM_THREADS both set to 8. ESMFold2 ran separately with both set to 16, after repair to PyTorch 2.11.0+cu128. Physical GPU/CPU models, exclusive allocation and per-model FLOPs are unestablished. Different inference settings, thread settings and timing boundaries preclude controlled speed comparisons despite shared hardware.
+
+The overlapping envelopes must not be summed. The complete launcher-to-final-retry interval was 26,502 s (7 h 21 min 42 s), including failed loading and waiting/repair, not exclusive GPU time or billed GPU-hours. Device-wide ten-second samples reached 10,670 MiB during overlapping Boltz/Chai and 15,141 MiB during ESM. They cannot attribute concurrent memory to individual models, establish isolated peaks or exclude shorter unsampled peaks. No energy or monetary cost is inferred.
 
 <a id="s7"></a>
 
